@@ -10,8 +10,8 @@ ESTIMATION:
     agents: 165
     dependent: wage
     indicator: enroll
-    comparison: 1
-    print_output: 0
+    comparison: True
+    print_output: False
     
     # semiparametric model
     show_output: False

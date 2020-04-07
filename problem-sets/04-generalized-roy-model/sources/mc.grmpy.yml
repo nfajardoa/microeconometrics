@@ -4,8 +4,10 @@ SIMULATION:
     seed: 7878
     source: data_mc
 ESTIMATION:
-    agents: 165
     file: data_mc.grmpy.txt
+
+    # parametric model
+    agents: 165
     optimizer: SCIPY-BFGS
     start: auto
     maxiter: 6383
@@ -13,6 +15,8 @@ ESTIMATION:
     indicator: D
     comparison: True
     print_output: False
+
+    # semiparametric model
     show_output: False
     logit: True
     nbins: 30
