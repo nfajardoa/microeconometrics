@@ -6,7 +6,7 @@
 
 \begin{document}\maketitle\vspace{-2cm}
 
-In this problem set, we are going to make use of the open-source Python package \href{https://grmpy.readthedocs.io/en/latest/}{\texttt{grmpy}} to gain a practical understanding of the generalized Roy model and the economics behind it. We will employ \texttt{grmpy} for both simulation and estimation purposes and, in particular, estimate \emph{marginal treatment effects} (MTE). To become familiar with the capabilities of {\texttt{grmpy}}, we will explore the relationship between college education and income using a toy data set in Task A. 
+In this problem set, we are going to make use of the open-source Python package \href{https://grmpy.readthedocs.io/en/latest/}{\texttt{grmpy}} to gain a practical understanding of the generalized Roy model and the economics behind it. We will employ \href{https://grmpy.readthedocs.io/en/latest/}{\texttt{grmpy}} for both simulation and estimation purposes and, in particular, estimate \emph{marginal treatment effects} (MTE). To become familiar with the capabilities of \href{https://grmpy.readthedocs.io/en/latest/}{\texttt{grmpy}}, we will explore the relationship between college education and income using a toy data set in Task A. 
 In Task B, we will then conduct a Monte Carlo analysis using our own simulated data. Auxiliary functions for Task B are provided in the file \href{https://github.com/HumanCapitalAnalysis/microeconometrics/blob/prset_grmpy/problem-sets/04-generalized-roy-model/sources/auxiliary.py}{\texttt{auxiliary.py}}.
 
 \section*{Task A} 
@@ -22,7 +22,7 @@ Suppose we want to estimate the effect of post-secondary education on income. We
   
    \item Open the initialization file \href{https://github.com/HumanCapitalAnalysis/microeconometrics/blob/prset_grmpy/problem-sets/04-generalized-roy-model/sources/education.grmpy.yml}{\texttt{education.grmpy.yml}} and put the name of the cleaned data set you just saved in the blank after \texttt{["ESTIMATION"]["file"]:} (Hint: You do not need to do this in your Jupyter Notebook. You can use a simple Text Editor, such as \texttt{Sublime}, instead).
    
-   \item You are now ready to estimate the marginal treatment effect of college attendance! \texttt{grmpy} offers two ways to do so. First, a parametric normal model. And second, the semiparametric method of \emph{local instrumental variables} (LIV).
+   \item You are now ready to estimate the marginal treatment effect of college attendance! \texttt{grmpy} offers two ways to do so. First, a parametric normal model. And second, the semiparametric method of \emph{local instrumental variables} (LIV) \citep{Heckman.2006d}.
    Using both models, estimate the MTE and plot it, while choosing different colors for the parametric and semiparametric plots, respectively. Note that for the semparametric model, the number of bootstrap iterations need to be specified when plotting the MTE. Choose a suitable number.
 
 \end{boenumerate}
@@ -31,8 +31,7 @@ Suppose we want to estimate the effect of post-secondary education on income. We
 \section*{Task B}
 
    To gain more insights into the economic implications behind \texttt{grmpy} and the realm of \emph{marginal treatment effects}, you will now perform a simulated Monte Carlo analysis. 
-   %Simulated data has the advantage over empirical data in that we know the underyling distribution of parameters. This way, we can compare our estimated parameters with their actual population counterparts. 
-   Simulated data allows us to explore additional objects of interest, for which we are not able to obtain reliable information using empirical data sets. With simulated data, we have information on the whole range of potential outcomes for each individual and can bypass the evaluation problem. Hence, we can compute the joint distribution of potential outcomes. Moreover, we can directly construct conventional treatment effect parameters on the population level.\\
+   Simulated data allows us to explore additional objects of interest, for which we are not able to obtain reliable information using empirical data sets. With simulated data, we have information on the whole range of potential outcomes for each individual and can bypass the evaluation problem. Hence, we can compute the joint distribution of potential outcomes. Moreover, we can directly construct conventional treatment effect parameters on the population level (e.g. see chapters 2.3, 2.4, and 3.3 in \cite{Heckman.2007e}).\\
 
    We will stick with our college example from above. For simplicity, however, assume now that log earnings ($Y$) only depend on mother's education ($momsEdu$), and the enrollment decision is solely driven by distance to college ($distCol$). To help you along with the analysis, we have set up some auxiliary functions in  \href{https://github.com/HumanCapitalAnalysis/microeconometrics/blob/prset_grmpy/problem-sets/04-generalized-roy-model/sources/auxiliary.py}{\texttt{auxiliary.py}}.
 
@@ -42,7 +41,7 @@ Suppose we want to estimate the effect of post-secondary education on income. We
   
   \item Based on this simulated data set, compute the \emph{average treatment effect} (ATE), the \emph{average treatment effect on the treated} (TT), and the \emph{average treatment effect on the untreated} (TUT) by hand (Note: there are no auxiliary functions required so far). \emph{How does the ATE compare with the other treatment effect parameters?} \emph{What does this imply for the marginal treatment effect?}
   
-  \item Plot the distribution of college-related wage benefits ($Y_1 - Y_0$). \textit{Hint:} You can verify5 your results in \textbf{2)} by plotting the effects along with the distribution of benefits.
+  \item Plot the distribution of college-related wage benefits ($Y_1 - Y_0$). \textit{Hint:} You can verify your results in \textbf{2)} by plotting the effects along with the distribution of benefits.
   
 \end{boenumerate}
 
@@ -50,7 +49,6 @@ Suppose we want to estimate the effect of post-secondary education on income. We
 
 \begin{boenumerate}\setcounter{enumi}{3}
   
-  %Update the distribution of unobservables in
   \item Simulate a new sample based on \href{https://github.com/HumanCapitalAnalysis/microeconometrics/blob/prset_grmpy/problem-sets/04-generalized-roy-model/sources/sim-eh.grmpy.yml}{\texttt{sim-eh.grmpy.yml}}. \emph{How is essential heterogeneity reflected in the distribution of unobservables?} Compare the two simulated data sets.
   
   \item \emph{Do the conventional treatment effect parameters differ now?} Construct them again as you did in \textbf{(2)}.
@@ -74,7 +72,7 @@ Suppose we want to estimate the effect of post-secondary education on income. We
   	\item In your \href{https://bashtage.github.io/linearmodels/doc/iv/introduction.html}{\texttt{IV/2SLS}} setting, use the full model. \emph{What is the endogeneous regressor? What is the instrument?}
   \end{itemize} 
   
-  Additionally, use \texttt{grmpy} to do step \textbf{b)} for both the paramteric and semiparametric approach. Compare wih the results above.
+  Additionally, use \texttt{grmpy} to do step \textbf{b)} for both the paramteric and semiparametric MTE approach. Compare wih the estimation results above (for a discussion see chapter 3.1 in \cite{Heckman.2007f}).
   
   \item Plot the joint distribution of potential outcomes.
   
@@ -82,9 +80,9 @@ Suppose we want to estimate the effect of post-secondary education on income. We
 \end{boenumerate}
 
 \nocite{grmpy-1.0}
-\nocite{Heckman.2006d}
-\nocite{Heckman.2007e}
-\nocite{Heckman.2007f}
+%\nocite{Heckman.2006d}
+%\nocite{Heckman.2007e}
+%\nocite{Heckman.2007f}
 
 \bibliographystyle{apacite}
 \bibliography{../../../submodules/bibliography/literature}
